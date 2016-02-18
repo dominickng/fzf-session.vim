@@ -1,0 +1,105 @@
+*fzf_session.txt*	 For Vim version 7.4	 Last change: 2015 February 23rd
+
+fzf extension to manage Vim sessions.
+
+Author:  Dominick Ng <dominick.ng@gmail.com>
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+CONTENTS                                        *fzf_session-contents*
+
+    1. Introduction.................................|fzf_session-intro|
+    2. Requirements.................................|fzf_session-requirements|
+    3. Commands.....................................|fzf_session-commands|
+    3. Global Options...............................|fzf_session-global-options|
+    3. fzf Specific Mappings........................|fzf_session-mappings|
+    4. Credits......................................|fzf_session-credits||
+    5. About........................................|fzf_session-about||
+    5. License......................................|fzf_session-license||
+
+==============================================================================
+INTRODUCTION                                    *fzf_session*
+
+Integrate session management into fzf.vim. Create, save, load, search, and
+delete sessions using fzf. Store all sessions in one configurable location.
+
+==============================================================================
+REQUIREMENTS                                    *fzf_session-requirements*
+
+  - fzf: https://github.com/junegunn/fzf
+  - fzf.vim: https://github.com/junegunn/fzf.vim
+
+==============================================================================
+COMMANDS                                        *fzf_session-commands*
+
+                                                *fzf_session-:Session*
+:Session {name}         Create a session with {name}. Session tracking is
+                        started.
+
+                                                *fzf_session-:SLoad*
+:SLoad {name}
+                        Load session with {name}.
+
+                                                *fzf_session-:SDelete*
+:SDelete {name}
+                        Delete session with {name}.
+
+                                                *fzf_session-:SQuit*
+:SQuit
+                        Stop tracking current active session and close all
+                        buffers.
+
+                                                *fzf_session-:SList*
+:SList
+                        List all available sessions.
+
+                                                *fzf_session-:Sessions*
+:Sessions               Launch fzf prompt for fuzzy searching available
+                        sessions.
+
+                        ** Requires fzf.vim
+                        (https://github.com/junegunn/fzf.vim)
+
+==============================================================================
+FZF SPECIFIC MAPPINGS                           *fzf_session-mappings*
+
+Once inside fzf prompt:~
+
+  <Ctrl-X>
+    Delete the session under the cursor.
+  Anything else
+    Open the session under the cursor.
+
+==============================================================================
+GLOBAL OPTIONS                                  *fzf_session-global-options*
+
+                                                *'fzf_session_path'*
+default: '~/.vim_sessions'
+
+Control where the session files will be persisted on disk.
+
+Example:
+    let g:fzf_session_path = 'my/sessions/folder'
+
+==============================================================================
+CREDITS                                         *fzf_session-credits*
+
+This plugin implementation was wholly based upon
+
+- {vim-ctrlp-session}
+  (https://github.com/okcompute/vim-ctrlp-session)
+
+==============================================================================
+ABOUT                                           *fzf_session-about*
+
+This plugin lives on GitHub:
+
+http://github.com/dominickng/fzf-session.vim
+
+==============================================================================
+LICENSE                                         *fzf_session-license*
+
+License: Same terms as Vim itself (see |license|)
+
+ vim:tw=78:et:ft=help:norl:
+
