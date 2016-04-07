@@ -10,19 +10,26 @@
 " Sessions
 " ------------------------------------------------------------------
 
-let s:default_action = {'ctrl-x': 'delete'}
+let s:default_action = {
+  \ 'ctrl-x': 'delete',
+  \ 'ctrl-s': 'save' }
 
 function! s:session_handler(lines)
-  if len(a:lines) != 2
+  " a:lines is a list of ['', '', <result>]. If there is no result, a:lines
+  " has the format [<query>, '']
+  if len(a:lines) != 3
+    execute fzf_session#create(a:lines[0])
     return
   endif
 
-  let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], 'e')
+  let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[1], 'e')
 
   if cmd == 'delete'
-    execute fzf_session#delete(a:lines[1])
+    execute fzf_session#delete(a:lines[2])
+  elseif cmd == 'save'
+    execute fzf_session#create(a:lines[2])
   else
-    execute fzf_session#load(a:lines[1])
+    execute fzf_session#load(a:lines[2])
   endif
 endfunction
 
@@ -36,7 +43,7 @@ function! fzf_session#session()
   return fzf#run(fzf#vim#wrap({
   \ 'source':  fzf_session#list(),
   \ 'sink*':   function('s:session_handler'),
-  \ 'options': '-m --prompt \>',
+  \ 'options': '-m --prompt \> --print-query',
   \ 'dir': dir
   \}))
 endfunction
