@@ -37,8 +37,8 @@ function! fzf_session#load(name)
     if exists('g:this_fzf_session')
         call fzf_session#quit()
     endif
-    let g:this_fzf_session_name = a:name
     exec("source ".s:session_file(a:name))
+    let g:this_fzf_session_name = a:name
 endfunction
 "}}}
 
