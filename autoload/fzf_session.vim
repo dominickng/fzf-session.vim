@@ -25,6 +25,7 @@ endfunction
 function! fzf_session#create(name)
     echo 'Tracking session '.a:name
     let g:this_fzf_session = s:session_file(a:name)
+    let g:this_fzf_session_name = a:name
     call fzf_session#persist()
 endfunction
 "}}}
@@ -36,6 +37,7 @@ function! fzf_session#load(name)
     if exists('g:this_fzf_session')
         call fzf_session#quit()
     endif
+    let g:this_fzf_session_name = a:name
     exec("source ".s:session_file(a:name))
 endfunction
 "}}}
@@ -60,6 +62,7 @@ function! fzf_session#quit()
         return
     endif
     unlet g:this_fzf_session
+    unlet g:this_fzf_session_name
     try
         " Delete all previous buffers
         exec("silent! bufdo bwipeout")
@@ -76,9 +79,9 @@ endfunction
 function! fzf_session#list()
     let l:wildignore=&wildignore
     set wildignore=
-    let l:session_files=split(globpath(fzf_session#path(), "*.vim"))
-    let l:result=map(l:session_files, "fnamemodify(expand(v:val), ':t:r')")
-    let &wildignore=l:wildignore
+    let l:session_files = split(globpath(fzf_session#path(), "*.vim"))
+    let l:result = map(l:session_files, "fnamemodify(expand(v:val), ':t:r')")
+    let &wildignore = l:wildignore
     return l:result
 endfunction
 "}}}
@@ -93,6 +96,7 @@ function! fzf_session#persist()
       call writefile(insert(readfile(g:this_fzf_session), 'let g:this_fzf_session =v:this_session', -2), g:this_fzf_session)
     catch
       unlet g:this_fzf_session
+      unlet g:this_fzf_session_name
       echoerr string(v:exception)
     finally
       let &sessionoptions=sessionoptions
