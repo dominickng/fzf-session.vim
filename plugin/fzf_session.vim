@@ -17,7 +17,9 @@ let s:default_action = {
 function! s:session_handler(lines)
   " a:lines is a list of ['', '', <result>]. If there is no result, a:lines
   " has the format [<query>, '']
-  if len(a:lines) != 3
+  if len(a:lines) == 0
+    return
+  elseif len(a:lines) == 2
     execute fzf_session#create(a:lines[0])
     return
   endif
