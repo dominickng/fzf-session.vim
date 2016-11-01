@@ -15,24 +15,26 @@ let s:default_action = {
   \ 'ctrl-s': 'save' }
 
 function! s:session_handler(lines)
-  " a:lines is a list of ['', '', <result>]. If there is no result, a:lines
+  " a:lines is a list of ['', <result>]. If there is no result, a:lines
   " has the format [<query>, '']
   if len(a:lines) == 0
     return
-  elseif len(a:lines) == 2
+  elseif len(a:lines) == 1
     execute fzf_session#create(a:lines[0])
     return
   endif
 
-  let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[1], 'e')
+  normal! m'
+  let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], '')
 
   if cmd == 'delete'
-    execute fzf_session#delete(a:lines[2])
+    execute fzf_session#delete(a:lines[1])
   elseif cmd == 'save'
-    execute fzf_session#create(a:lines[2])
+    execute fzf_session#create(a:lines[1])
   else
-    execute fzf_session#load(a:lines[2])
+    execute fzf_session#load(a:lines[1])
   endif
+  normal ^zz
 endfunction
 
 function! fzf_session#session()
