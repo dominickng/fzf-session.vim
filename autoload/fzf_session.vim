@@ -16,7 +16,7 @@ endfunction
 
 " Return a session file path from its name {{{
 function! s:session_file(name)
-    let l:file = fzf_session#path()."/".a:name.".vim"
+    let l:file = fzf_session#path()."/".a:name
     return fnamemodify(expand(l:file), ':p')
 endfunction
 "}}}
@@ -79,7 +79,7 @@ endfunction
 function! fzf_session#list()
     let l:wildignore=&wildignore
     set wildignore=
-    let l:session_files = split(globpath(fzf_session#path(), "*.vim"))
+    let l:session_files = split(globpath(fzf_session#path(), "*"))
     let l:result = map(l:session_files, "fnamemodify(expand(v:val), ':t:r')")
     let &wildignore = l:wildignore
     return l:result
