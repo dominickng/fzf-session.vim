@@ -8,7 +8,7 @@
 " Return sessions location path {{{
 function! fzf_session#path()
     if !exists('g:fzf_session_path')
-        return expand('%:.')
+        return expand('%:h')
     endif
     return g:fzf_session_path
 endfunction
