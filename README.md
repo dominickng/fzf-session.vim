@@ -33,6 +33,15 @@ Installation
 
     Plug 'dominickng/fzf-session'
 
+Configuration
+=============
+
+There is one configurable option: the directory to store the session files.
+If not set, the plugin will use the containing directory of the current open
+file when a session is created.
+
+`let g:fzf_session_path = $HOME . '/tmp/vim/session'`
+
 Usage
 =====
 
@@ -42,19 +51,19 @@ of the implementation is the same.
 
 ### `:Session {name}`
 
-Create a session with name. Session will be automatically tracked.
+Create a session called `{name}`. The session will be automatically tracked.
 
 ### `:SLoad {name}`
 
-Load session with {name}.
+Load session called `{name}`.
 
 ### `:SDelete {name}`
 
-Delete sessio with {name}.
+Delete session called `{name}`.
 
 ### `:SQuit`
 
-Stop tracking current active session and close all buffers.
+Stop tracking the current active session and close all buffers.
 
 ### `:SList`
 
@@ -68,6 +77,19 @@ Default actions in the prompt:
 
  - `<Ctrl-X>`: Delete session under the cursor
  - Any other key: Open session under the cursor
+ 
+Mappings
+========
+
+You may wish to create shorter mappings to the above commands, e.g.
+
+```
+" Launches fzf prompt to search sessions with <leader>l.
+nnoremap <leader>l :Sessions<CR>
+
+" Starts the prompt to save a session, awaiting a name to be entered.
+nnoremap <leader>s :Session<Space>
+```
 
 Credits
 =======
@@ -78,4 +100,4 @@ This plugin is wholly based upon
 License
 =======
 
-Distributed under the same terms as Vim itself. See :help license.
+Distributed under the same terms as Vim itself. See `:help license`.
