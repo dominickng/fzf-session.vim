@@ -40,7 +40,10 @@ endfunction
 function! fzf_session#session()
   let raw_dir = fzf_session#path()
   if !isdirectory(expand(raw_dir))
-    return s:warn('Invalid directory')
+    echohl WarningMsg
+    echomsg "Invalid directory"
+    echohl None
+    return 0
   endif
   let dir = substitute(raw_dir, '/*$', '/', '')
 
