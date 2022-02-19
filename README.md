@@ -23,15 +23,15 @@ Installation
 
 [NeoBundle](https://github.com/Shougo/neobundle.vim):
 
-    NeoBundle 'dominickng/fzf-session'
+    NeoBundle 'dominickng/fzf-session.vim'
 
 [Vundle](https://github.com/gmarik/Vundle.vim):
 
-    Plugin 'dominickng/fzf-session'
+    Plugin 'dominickng/fzf-session.vim'
 
 [vim-plug](https://github.com/junegunn/vim-plug):
 
-    Plug 'dominickng/fzf-session'
+    Plug 'dominickng/fzf-session.vim'
 
 Configuration
 =============
