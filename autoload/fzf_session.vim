@@ -79,7 +79,7 @@ endfunction
 function! fzf_session#list()
     let l:wildignore=&wildignore
     set wildignore=
-    let l:session_files = split(globpath(fzf_session#path(), "*"))
+    let l:session_files = split(globpath(fzf_session#path(), "*"), "\n")
     let l:result = map(l:session_files, "fnamemodify(expand(v:val), ':t:r')")
     let &wildignore = l:wildignore
     return l:result
